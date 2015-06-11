@@ -25,31 +25,16 @@ $config = require(__DIR__ . '/config.php');
 
 $overseer->configure($config);
 
-//$writer = new Role('writer');
-//$editor = new Role('editor');
-//
-//$write  = new Permission('book.write');
-//$author = new Permission('book.author');
-//$read   = new Permission('book.read');
-//
-//$author->addRule(new AuthorRule);
-//
-//$writer->addPermission('book.write');
-//$writer->addPermission('book.author');
-//$editor->addPermission('book.read');
-//
-//$overseer->saveRole($writer);
-//$overseer->saveRole($editor);
-//
-//$overseer->savePermission($read);
-//$overseer->savePermission($write);
-//$overseer->savePermission($author);
-//
-//$overseer->saveAssignment(new Assignment('writer', 1));
-//$overseer->saveAssignment(new Assignment('editor', 1));
+$permissions = implode(', ', $overseer->getPermissions($myUser));
 
-var_dump($overseer->getPermissions($myUser));
+echo "permissions: $permissions" . PHP_EOL;
 
-var_dump($overseer->getPermissionsForResource($myUser, $myBook));
+$bookPermissions = implode(', ', $overseer->getPermissionsForResource($myUser, $myBook));
 
-var_dump($overseer->hasPermission('book.author', $myUser, $myBook));
+echo "permissions to book: $bookPermissions" . PHP_EOL;
+
+if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
+    echo "I am the author of the book." . PHP_EOL;
+} else {
+    echo "I am not the author of the book" . PHP_EOL;
+}
