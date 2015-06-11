@@ -1,8 +1,10 @@
 # Overseer
 
-Framework agnostic RBAC implementation in PHP
+Overseer is a framework agnostic [RBAC](http://en.wikipedia.org/wiki/Role-based_access_control) implementation in PHP.
 
-# Example usage
+# Example
+
+The following script demonstrates usage (you can find the rest of the code in the [example](example) folder):
 
 ```php
 <?php
@@ -70,10 +72,10 @@ if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
 
 ```
 
-Output:
+Here is the output from that script:
 
 ```
-permissions: book.write, book.read
-permissions to book: book.author
+My permissions: book.write, book.read
+My permissions to the book: book.author
 I am the author of the book.
 ```
