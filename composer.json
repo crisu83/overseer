@@ -1,0 +1,23 @@
+{
+    "name": "crisu83/overseer",
+    "description": "Framework agnostic RBAC implementation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christoffer Niska",
+            "email": "christofferniska@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Crisu83\\Overseer\\": "./src"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.1@dev",
+        "codeception/verify": "dev-master",
+        "codeception/specify": "dev-master"
+    }
+}
