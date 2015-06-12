@@ -87,42 +87,27 @@ class Overseer
 
 
     /**
-     * @param Subject $subject
+     * @param Subject       $subject
+     * @param Resource|null $resource
      *
      * @return array
      * @throws PermissionNotFound
      * @throws RoleNotFound
      */
-    public function getPermissions(Subject $subject)
+    public function getPermissions(Subject $subject, Resource $resource = null)
     {
         $permissions = [];
 
         foreach ($this->getPermissionsForSubject($subject) as $permission) {
-            if (!$permission->hasRules()) {
-                $permissions[] = $permission->getName();
+            if ($resource !== null && !$permission->appliesToResource($resource)) {
+                continue;
             }
-        }
 
-        return $permissions;
-    }
-
-
-    /**
-     * @param Subject  $subject
-     * @param Resource $resource
-     *
-     * @return array
-     * @throws PermissionNotFound
-     * @throws RoleNotFound
-     */
-    public function getPermissionsForResource(Subject $subject, Resource $resource)
-    {
-        $permissions = [];
-
-        foreach ($this->getPermissionsForSubject($subject) as $permission) {
-            if ($permission->evaluate($subject, $resource)) {
-                $permissions[] = $permission->getName();
+            if ($resource !== null && !$permission->evaluate($subject, $resource)) {
+                continue;
             }
+
+            $permissions[] = $permission->getName();
         }
 
         return $permissions;
@@ -138,13 +123,44 @@ class Overseer
      */
     public function hasPermission($name, Subject $subject, Resource $resource = null)
     {
-        $permissions = $this->getPermissions($subject);
+        return in_array($name, $this->getPermissions($subject, $resource));
+    }
 
-        if ($resource !== null) {
-            $permissions = array_merge($this->getPermissionsForResource($subject, $resource), $permissions);
+
+    /**
+     * @param Subject $subject
+     *
+     * @return Assignment[]
+     */
+    protected function getAssignmentsForSubject(Subject $subject)
+    {
+        return $this->assignmentStorage->getAssignments($subject);
+    }
+
+
+    /**
+     * @param Subject $subject
+     *
+     * @return Role[]
+     * @throws RoleNotFound
+     */
+    protected function getRolesForSubject(Subject $subject)
+    {
+        $roles = [];
+
+        foreach ($this->getAssignmentsForSubject($subject) as $assignment) {
+            $roleName = $assignment->getRoleName();
+
+            $role = $this->roleStorage->getRole($roleName);
+
+            if ($role === null) {
+                throw new RoleNotFound($roleName);
+            }
+
+            $roles[] = $role;
         }
 
-        return in_array($name, $permissions);
+        return $roles;
     }
 
 
@@ -159,17 +175,7 @@ class Overseer
     {
         $permissions = [];
 
-        $assignments = $this->assignmentStorage->getAssignments($subject);
-
-        foreach ($assignments as $assignment) {
-            $roleName = $assignment->getRoleName();
-
-            $role = $this->roleStorage->getRole($roleName);
-
-            if ($role === null) {
-                throw new RoleNotFound($roleName);
-            }
-
+        foreach ($this->getRolesForSubject($subject) as $role) {
             foreach ($role->getPermissions() as $permissionName) {
                 $permission = $this->permissionStorage->getPermission($permissionName);
 
