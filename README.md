@@ -74,7 +74,7 @@ if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
 Here is the output from that script:
 
 ```
-My permissions: book.write, book.read
-My permissions to the book: book.author
+My permissions: book.read, book.write
+My permissions to the book: book.read, book.write, book.author
 I am the author of the book.
 ```
