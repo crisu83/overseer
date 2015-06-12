@@ -30,8 +30,8 @@ $assignmentStorage = new AssignmentStorage;
 
 $overseer = new Overseer($roleStorage, $permissionStorage, $assignmentStorage);
 
-$myUser = new User(1);
-$myBook = new Book(1);
+$myUser = new User(1); // subject
+$myBook = new Book(1); // resource
 
 $writer = new Role('writer');
 $editor = new Role('editor');
@@ -55,13 +55,9 @@ $overseer->savePermission($author);
 
 $overseer->saveAssignment(new Assignment(1, ['writer', 'editor']));
 
-$permissions = implode(', ', $overseer->getPermissions($myUser));
+echo "permissions: " . implode(', ', $overseer->getPermissions($myUser)) . PHP_EOL;
 
-echo "permissions: $permissions" . PHP_EOL;
-
-$bookPermissions = implode(', ', $overseer->getPermissionsForResource($myUser, $myBook));
-
-echo "permissions to book: $bookPermissions" . PHP_EOL;
+echo "permissions to book: " . implode(', ', $overseer->getPermissions($myUser, $myBook)) . PHP_EOL;
 
 if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
     echo "I am the author of the book." . PHP_EOL;
