@@ -11,6 +11,11 @@ class Permission
     private $name;
 
     /**
+     * @var string
+     */
+    private $resourceName;
+
+    /**
      * @var Rule[]
      */
     private $rules = [];
@@ -22,9 +27,10 @@ class Permission
      * @param string $resourceName
      * @param string $permissionName
      */
-    public function __construct($permissionName)
+    public function __construct($permissionName, $resourceName = null)
     {
         $this->setName($permissionName);
+        $this->setResourceName($resourceName);
     }
 
 
@@ -47,6 +53,17 @@ class Permission
 
 
     /**
+     * @param Resource $resource
+     *
+     * @return bool
+     */
+    public function appliesToResource(Resource $resource)
+    {
+        return $this->resourceName === $resource->getResourceName();
+    }
+
+
+    /**
      * @param Subject  $subject
      * @param Resource $resource
      *
@@ -56,7 +73,7 @@ class Permission
     public function evaluate(Subject $subject, Resource $resource)
     {
         if (!$this->hasRules()) {
-            return false;
+            return true;
         }
 
         foreach ($this->rules as $rule) {
@@ -88,5 +105,14 @@ class Permission
         }
 
         $this->name = $name;
+    }
+
+
+    /**
+     * @param string $resourceName
+     */
+    private function setResourceName($resourceName)
+    {
+        $this->resourceName = $resourceName;
     }
 }
