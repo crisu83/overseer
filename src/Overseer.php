@@ -99,7 +99,7 @@ class Overseer
         $permissions = [];
 
         foreach ($this->getPermissionsForSubject($subject) as $permission) {
-            if ($resource !== null && !$permission->appliesToResource($resource)) {
+            if ($permission->hasRules() && $resource === null) {
                 continue;
             }
 
