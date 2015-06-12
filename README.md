@@ -55,9 +55,11 @@ $overseer->savePermission($author);
 
 $overseer->saveAssignment(new Assignment(1, ['writer', 'editor']));
 
-echo "permissions: " . implode(', ', $overseer->getPermissions($myUser)) . PHP_EOL;
+echo "My permissions: " . PHP_EOL;
+echo "  " . implode(', ', $overseer->getPermissions($myUser)) . PHP_EOL;
 
-echo "permissions to book: " . implode(', ', $overseer->getPermissions($myUser, $myBook)) . PHP_EOL;
+echo "My permissions to the book: " . PHP_EOL;
+echo "  " . implode(', ', $overseer->getPermissions($myUser, $myBook)) . PHP_EOL;
 
 if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
     echo "I am the author of the book." . PHP_EOL;
@@ -70,7 +72,9 @@ if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
 Here is the output from that script:
 
 ```
-My permissions: book.read, book.write
-My permissions to the book: book.read, book.write, book.author
+My permissions:
+  book.read, book.write
+My permissions to the book:
+  book.read, book.write, book.author
 I am the author of the book.
 ```

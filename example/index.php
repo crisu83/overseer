@@ -25,13 +25,11 @@ $config = require(__DIR__ . '/config.php');
 
 $overseer->configure($config);
 
-$permissions = implode(', ', $overseer->getPermissions($myUser));
+echo "My permissions: " . PHP_EOL;
+echo "  " . implode(', ', $overseer->getPermissions($myUser)) . PHP_EOL;
 
-echo "permissions: $permissions" . PHP_EOL;
-
-$bookPermissions = implode(', ', $overseer->getPermissions($myUser, $myBook));
-
-echo "permissions to book: $bookPermissions" . PHP_EOL;
+echo "My permissions to the book: " . PHP_EOL;
+echo "  " . implode(', ', $overseer->getPermissions($myUser, $myBook)) . PHP_EOL;
 
 if ($overseer->hasPermission('book.author', $myUser, $myBook)) {
     echo "I am the author of the book." . PHP_EOL;
