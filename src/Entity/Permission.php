@@ -5,6 +5,10 @@ use Crisu83\Overseer\Exception\InvalidArgument;
 class Permission
 {
 
+    const RULE_ALLOW = 1;
+    const RULE_DENY = -1;
+    const RULE_NEUTRAL = 0;
+
     /**
      * @var string
      */
@@ -24,8 +28,8 @@ class Permission
     /**
      * Permission constructor.
      *
-     * @param string $resourceName
-     * @param string $permissionName
+     * @param string      $permissionName
+     * @param string|null $resourceName
      */
     public function __construct($permissionName, $resourceName = null)
     {
@@ -77,7 +81,7 @@ class Permission
         }
 
         foreach ($this->rules as $rule) {
-            if (!$rule->evaluate($subject, $resource)) {
+            if ($rule->evaluate($subject, $resource) === self::RULE_DENY) {
                 return false;
             }
         }

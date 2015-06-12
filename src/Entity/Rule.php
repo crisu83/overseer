@@ -7,7 +7,7 @@ interface Rule
      * @param Subject  $subject
      * @param Resource $resource
      *
-     * @return bool
+     * @return int
      */
     public function evaluate(Subject $subject, Resource $resource);
 }
