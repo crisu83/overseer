@@ -10,9 +10,10 @@ return [
         ],
     ],
     'permissions' => [
-        'book.write' => [],
-        'book.read' => [],
+        'book.write' => ['resource' => 'book'],
+        'book.read' => ['resource' => 'book'],
         'book.author' => [
+            'resource' => 'book',
             'rules' => ['AuthorRule'],
         ],
     ],
