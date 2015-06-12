@@ -2,6 +2,9 @@
 
 return [
     'roles' => [
+        'admin' => [
+            'roles' => ['writer', 'editor'],
+        ],
         'writer' => [
             'permissions' => ['book.write', 'book.author'],
         ],
@@ -16,8 +19,11 @@ return [
             'resource' => 'book',
             'rules' => ['AuthorRule'],
         ],
+        'article.read' => ['resource' => 'article'],
     ],
     'assignments' => [
-        '1' => ['writer', 'editor'],
+        '1' => [
+            'roles' => ['admin'],
+        ],
     ],
 ];
