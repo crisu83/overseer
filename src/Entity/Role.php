@@ -41,7 +41,7 @@ class Role
      *
      * @throws InvalidArgument
      */
-    public function addRole($roleName)
+    public function inheritRole($roleName)
     {
         if (empty($roleName)) {
             throw new InvalidArgument('Role name cannot be empty.');

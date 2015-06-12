@@ -58,7 +58,7 @@ class Builder
         foreach ($config as $roleName => $roleConfig) {
             $this->overseer->saveRole(new Role(
                 $roleName,
-                isset($roleConfig['roles']) ? $roleConfig['roles'] : [],
+                isset($roleConfig['inherits']) ? $roleConfig['inherits'] : [],
                 isset($roleConfig['permissions']) ? $roleConfig['permissions'] : []
             ));
         }

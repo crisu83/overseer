@@ -3,7 +3,7 @@
 return [
     'roles' => [
         'admin' => [
-            'roles' => ['writer', 'editor'],
+            'inherits' => ['writer', 'editor'],
         ],
         'writer' => [
             'permissions' => ['book.write', 'book.author'],
