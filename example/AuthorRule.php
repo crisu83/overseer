@@ -14,9 +14,9 @@ class AuthorRule implements Rule
     public function evaluate(Subject $subject, Resource $resource)
     {
         if (!$resource instanceof Book) {
-            return Permission::RULE_NEUTRAL;
+            return false;
         }
 
-        return $resource->getAuthorId() === $subject->getSubjectId() ? Permission::RULE_ALLOW : Permission::RULE_DENY;
+        return $resource->getAuthorId() === $subject->getSubjectId();
     }
 }

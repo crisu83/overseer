@@ -81,7 +81,7 @@ class Permission
         }
 
         foreach ($this->rules as $rule) {
-            if ($rule->evaluate($subject, $resource) === self::RULE_DENY) {
+            if (!$rule->evaluate($subject, $resource)) {
                 return false;
             }
         }
