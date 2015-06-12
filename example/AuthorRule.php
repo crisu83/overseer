@@ -11,7 +11,7 @@ class AuthorRule implements Rule
     /**
      * @inheritdoc
      */
-    public function evaluate(Subject $subject, Resource $resource)
+    public function evaluate(Subject $subject, Resource $resource, array $params)
     {
         if (!$resource instanceof Book) {
             return false;

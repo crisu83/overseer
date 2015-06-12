@@ -89,11 +89,12 @@ class Overseer
     /**
      * @param Subject       $subject
      * @param Resource|null $resource
+     * @param array         $params
      *
      * @return array
      * @throws PermissionNotFound
      */
-    public function getPermissions(Subject $subject, Resource $resource = null)
+    public function getPermissions(Subject $subject, Resource $resource = null, array $params = [])
     {
         $permissions = [];
 
@@ -102,7 +103,7 @@ class Overseer
                 continue;
             }
 
-            if ($resource !== null && !$this->evaluatePermission($permission, $subject, $resource)) {
+            if ($resource !== null && !$this->evaluatePermission($permission, $subject, $resource, $params)) {
                 continue;
             }
 
@@ -117,16 +118,21 @@ class Overseer
      * @param Permission $permission
      * @param Subject    $subject
      * @param Resource   $resource
+     * @param array      $params
      *
      * @return bool
      */
-    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource)
-    {
+    protected function evaluatePermission(
+        Permission $permission,
+        Subject $subject,
+        Resource $resource,
+        array $params
+    ) {
         if (!$permission->appliesToResource($resource)) {
             return false;
         }
 
-        if (!$permission->evaluate($subject, $resource)) {
+        if (!$permission->evaluate($subject, $resource, $params)) {
             return false;
         }
 
@@ -138,12 +144,13 @@ class Overseer
      * @param string        $permissionName
      * @param Subject       $subject
      * @param Resource|null $resource
+     * @param array         $params
      *
      * @return bool
      */
-    public function hasPermission($permissionName, Subject $subject, Resource $resource = null)
+    public function hasPermission($permissionName, Subject $subject, Resource $resource = null, array $params = [])
     {
-        return in_array($permissionName, $this->getPermissions($subject, $resource));
+        return in_array($permissionName, $this->getPermissions($subject, $resource, $params));
     }
 
 

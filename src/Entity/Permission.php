@@ -72,17 +72,18 @@ class Permission
     /**
      * @param Subject  $subject
      * @param Resource $resource
+     * @param array    $params
      *
      * @return bool
      */
-    public function evaluate(Subject $subject, Resource $resource)
+    public function evaluate(Subject $subject, Resource $resource, array $params)
     {
         if (!$this->hasRules()) {
             return true;
         }
 
         foreach ($this->rules as $rule) {
-            if (!$rule->evaluate($subject, $resource)) {
+            if (!$rule->evaluate($subject, $resource, $params)) {
                 return false;
             }
         }
