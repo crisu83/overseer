@@ -2,7 +2,7 @@
 
 use Crisu83\Overseer\Entity\Resource;
 
-class Book implements Resource, HasAuthor
+class Book implements Resource
 {
 
     /**

@@ -29,7 +29,7 @@ $permissions = implode(', ', $overseer->getPermissions($myUser));
 
 echo "permissions: $permissions" . PHP_EOL;
 
-$bookPermissions = implode(', ', $overseer->getPermissionsForResource($myUser, $myBook));
+$bookPermissions = implode(', ', $overseer->getPermissions($myUser, $myBook));
 
 echo "permissions to book: $bookPermissions" . PHP_EOL;
 
