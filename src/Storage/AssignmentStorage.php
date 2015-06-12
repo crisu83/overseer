@@ -13,9 +13,9 @@ interface AssignmentStorage
 
 
     /**
-     * @param Subject $subject
+     * @param string $subjectId
      *
-     * @return Assignment[]
+     * @return Assignment
      */
-    public function getAssignments(Subject $subject);
+    public function getAssignment($subjectId);
 }

@@ -29,25 +29,15 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
      */
     public function saveAssignment(Assignment $assignment)
     {
-        $this->assignments[] = $assignment;
+        $this->assignments[$assignment->getSubjectId()] = $assignment;
     }
 
 
     /**
      * @inheritdoc
      */
-    public function getAssignments(Subject $subject)
+    public function getAssignment($subjectId)
     {
-        $id = $subject->getSubjectId();
-
-        $subjectAssignments = [];
-
-        foreach ($this->assignments as $assignment) {
-            if ($assignment->getSubjectId() === $id) {
-                $subjectAssignments[] = $assignment;
-            }
-        }
-
-        return $subjectAssignments;
+        return isset($this->assignments[$subjectId]) ? $this->assignments[$subjectId] : null;
     }
 }

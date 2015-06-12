@@ -53,8 +53,7 @@ $overseer->savePermission($read);
 $overseer->savePermission($write);
 $overseer->savePermission($author);
 
-$overseer->saveAssignment(new Assignment('writer', 1));
-$overseer->saveAssignment(new Assignment('editor', 1));
+$overseer->saveAssignment(new Assignment(1, ['writer', 'editor']));
 
 $permissions = implode(', ', $overseer->getPermissions($myUser));
 

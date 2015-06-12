@@ -8,24 +8,52 @@ class Assignment
     /**
      * @var string
      */
-    private $roleName;
+    private $subjectId;
 
     /**
-     * @var string
+     * @var array
      */
-    private $subjectId;
+    private $roles;
 
 
     /**
      * Assignment constructor.
      *
-     * @param string $roleName
      * @param string $subjectId
+     * @param array  $roles
      */
-    public function __construct($roleName, $subjectId)
+    public function __construct($subjectId, array $roles = [])
     {
-        $this->setRoleName($roleName);
         $this->setSubjectId($subjectId);
+        $this->setRoles($roles);
+    }
+
+
+    /**
+     * @param string $roleName
+     *
+     * @throws InvalidArgument
+     */
+    public function addRole($roleName)
+    {
+        if (empty($permissionName)) {
+            throw new InvalidArgument('Role name cannot be empty.');
+        }
+
+        if ($this->hasRole($roleName)) {
+            return;
+        }
+
+        $this->roles[] = $roleName;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasRoles()
+    {
+        return !empty($this->roles);
     }
 
 
@@ -39,24 +67,22 @@ class Assignment
 
 
     /**
-     * @return string
+     * @return array
      */
-    public function getRoleName()
+    public function getRoles()
     {
-        return $this->roleName;
+        return $this->roles;
     }
 
 
     /**
      * @param string $roleName
+     *
+     * @return bool
      */
-    private function setRoleName($roleName)
+    private function hasRole($roleName)
     {
-        if (empty($roleName)) {
-            throw new InvalidArgument('Assignment role name cannot be empty.');
-        }
-
-        $this->roleName = $roleName;
+        return in_array($roleName, $this->roles);
     }
 
 
@@ -72,5 +98,14 @@ class Assignment
         }
 
         $this->subjectId = (string) $subjectId;
+    }
+
+
+    /**
+     * @param array $roles
+     */
+    private function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 }
