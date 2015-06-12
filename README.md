@@ -36,9 +36,9 @@ $myBook = new Book(1);
 $writer = new Role('writer');
 $editor = new Role('editor');
 
-$write  = new Permission('book.write');
-$author = new Permission('book.author');
-$read   = new Permission('book.read');
+$write  = new Permission('book.write', 'book');
+$author = new Permission('book.author', 'book');
+$read   = new Permission('book.read', 'book');
 
 $author->addRule(new AuthorRule);
 
