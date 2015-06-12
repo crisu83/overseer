@@ -49,7 +49,9 @@ class Builder
 
         if (isset($this->config['permissions'])) {
             foreach ($this->config['permissions'] as $permissionName => $permissionConfig) {
-                $permission = new Permission($permissionName);
+                $resourceName = isset($permissionConfig['resource']) ? $permissionConfig['resource'] : null;
+
+                $permission = new Permission($permissionName, $resourceName);
 
                 if (isset($permissionConfig['rules'])) {
                     foreach ($permissionConfig['rules'] as $ruleClass) {
