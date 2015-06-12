@@ -22,7 +22,7 @@ class Permission
     /**
      * @var Rule[]
      */
-    private $rules = [];
+    private $rules;
 
 
     /**
@@ -30,11 +30,13 @@ class Permission
      *
      * @param string      $permissionName
      * @param string|null $resourceName
+     * @param Rule[]      $rules
      */
-    public function __construct($permissionName, $resourceName = null)
+    public function __construct($permissionName, $resourceName = null, array $rules = [])
     {
         $this->setName($permissionName);
         $this->setResourceName($resourceName);
+        $this->setRules($rules);
     }
 
 
@@ -72,7 +74,6 @@ class Permission
      * @param Resource $resource
      *
      * @return bool
-     * @throws InvalidArgument
      */
     public function evaluate(Subject $subject, Resource $resource)
     {
@@ -118,5 +119,14 @@ class Permission
     private function setResourceName($resourceName)
     {
         $this->resourceName = $resourceName;
+    }
+
+
+    /**
+     * @param Rule[] $rules
+     */
+    private function setRules($rules)
+    {
+        $this->rules = $rules;
     }
 }
