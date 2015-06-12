@@ -1,8 +1,29 @@
 # Overseer
 
-Overseer is a framework agnostic [RBAC](http://en.wikipedia.org/wiki/Role-based_access_control) implementation in PHP.
+Overseer is a framework agnostic [RBAC](http://en.wikipedia.org/wiki/Role-based_access_control) implementation in PHP. 
 
-# Example
+## How does Overseer differ from other implementations?
+
+Overseer is developed using PHP OOP best practices and meets the [PHP-FIG](http://www.php-fig.org/) standards. It is not only framework agnostic, but also storage agnostic, which allows you to use it together with your favorite libraries. 
+
+## Features
+
+- Role inhertiance
+- Permission business rules
+- Resource based permissions
+- Configurable
+
+## Work in progress
+
+- Unit tests
+- Refactoring
+- README
+
+## Usage
+
+Overseer comes bundled with a runtime storage implementation that is suitable for non-production use. If you plan on using Overseer in production we suggest that you implement persistent storage and caching to improve performance.
+
+## Example
 
 The following script demonstrates usage (you can find the rest of the code in the [example](example) folder):
 
