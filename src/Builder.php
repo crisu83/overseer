@@ -74,7 +74,7 @@ class Builder
             $this->overseer->savePermission(new Permission(
                 $permissionName,
                 isset($permissionConfig['resource']) ? $permissionConfig['resource'] : null,
-                isset($permissionConfig['rules']) ? $this->createRules($permissionConfig['rules']) : []
+                isset($permissionConfig['rules']) ? $permissionConfig['rules'] : []
             ));
         }
     }
@@ -91,22 +91,5 @@ class Builder
                 isset($assignmentConfig['roles']) ? $assignmentConfig['roles'] : []
             ));
         }
-    }
-
-
-    /**
-     * @param array $config
-     *
-     * @return array
-     */
-    private function createRules(array $config)
-    {
-        $rules = [];
-
-        foreach ($config as $className) {
-            $rules[] = new $className;
-        }
-
-        return $rules;
     }
 }

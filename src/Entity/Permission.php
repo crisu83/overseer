@@ -5,10 +5,6 @@ use Crisu83\Overseer\Exception\InvalidArgument;
 class Permission
 {
 
-    const RULE_ALLOW = 1;
-    const RULE_DENY = -1;
-    const RULE_NEUTRAL = 0;
-
     /**
      * @var string
      */
@@ -20,7 +16,7 @@ class Permission
     private $resourceName;
 
     /**
-     * @var Rule[]
+     * @var array
      */
     private $rules;
 
@@ -30,7 +26,7 @@ class Permission
      *
      * @param string      $permissionName
      * @param string|null $resourceName
-     * @param Rule[]      $rules
+     * @param array       $rules
      */
     public function __construct($permissionName, $resourceName = null, array $rules = [])
     {
@@ -41,11 +37,16 @@ class Permission
 
 
     /**
-     * @param Rule $rule
+     * @param string $ruleName
+     *
+     * @throws \Crisu83\Overseer\Exception\InvalidArgument
      */
-    public function addRule(Rule $rule)
+    public function addRule($ruleName)
     {
-        $this->rules[] = $rule;
+        if ($this->hasRule($ruleName)) {
+            throw new InvalidArgument('Rule already exists.');
+        }
+        $this->rules[] = $ruleName;
     }
 
 
@@ -55,6 +56,16 @@ class Permission
     public function hasRules()
     {
         return !empty($this->rules);
+    }
+
+    /**
+     * @param string $ruleName
+     *
+     * @return bool
+     */
+    private function hasRule($ruleName)
+    {
+        return in_array($ruleName, $this->rules);
     }
 
 
@@ -82,7 +93,9 @@ class Permission
             return true;
         }
 
-        foreach ($this->rules as $rule) {
+        foreach ($this->rules as $className) {
+            /** @var Rule $rule */
+            $rule = new $className;
             if (!$rule->evaluate($subject, $resource, $params)) {
                 return false;
             }
