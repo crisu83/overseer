@@ -18,4 +18,9 @@ interface AssignmentStorage
      * @return Assignment
      */
     public function getAssignment($subjectId);
+
+    /**
+     * Clear the assignments.
+     */
+    public function clearAssignments();
 }

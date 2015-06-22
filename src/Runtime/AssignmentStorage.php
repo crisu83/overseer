@@ -40,4 +40,12 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     {
         return isset($this->assignments[$subjectId]) ? $this->assignments[$subjectId] : null;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearAssignments()
+    {
+        $this->assignments = [];
+    }
 }

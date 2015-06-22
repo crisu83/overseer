@@ -17,4 +17,9 @@ interface PermissionStorage
      * @return Permission|null
      */
     public function getPermission($name);
+
+    /**
+     * Clear the permissions.
+     */
+    public function clearPermissions();
 }

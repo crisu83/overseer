@@ -69,6 +69,15 @@ class Overseer
 
 
     /**
+     * Clear the roles.
+     */
+    public function clearRoles()
+    {
+        $this->roleStorage->clearRoles();
+    }
+
+
+    /**
      * @param Permission $permission
      */
     public function savePermission(Permission $permission)
@@ -78,11 +87,29 @@ class Overseer
 
 
     /**
+     * Clear the permissions.
+     */
+    public function clearPermissions()
+    {
+        $this->permissionStorage->clearPermissions();
+    }
+
+
+    /**
      * @param Assignment $assignment
      */
     public function saveAssignment(Assignment $assignment)
     {
         $this->assignmentStorage->saveAssignment($assignment);
+    }
+
+
+    /**
+     * Clear the assignments.
+     */
+    public function clearAssignments()
+    {
+        $this->assignmentStorage->clearAssignments();
     }
 
 
@@ -122,12 +149,8 @@ class Overseer
      *
      * @return bool
      */
-    protected function evaluatePermission(
-        Permission $permission,
-        Subject $subject,
-        Resource $resource,
-        array $params
-    ) {
+    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource, array $params)
+    {
         if (!$permission->appliesToResource($resource)) {
             return false;
         }

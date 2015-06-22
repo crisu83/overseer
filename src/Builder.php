@@ -32,17 +32,23 @@ class Builder
 
 
     /**
-     *
+     * Build the assignments, roles and permissions based on configuration.
      */
     public function build()
     {
+        $this->overseer->clearRoles();
+
         if (isset($this->config['roles'])) {
             $this->saveRoles($this->config['roles']);
         }
 
+        $this->overseer->clearPermissions();
+
         if (isset($this->config['permissions'])) {
             $this->savePermissions($this->config['permissions']);
         }
+
+        $this->overseer->clearAssignments();
 
         if (isset($this->config['assignments'])) {
             $this->saveAssignments($this->config['assignments']);
