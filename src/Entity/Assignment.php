@@ -11,6 +11,11 @@ class Assignment
     private $subjectId;
 
     /**
+     * @var string
+     */
+    private $subjectName;
+
+    /**
      * @var array
      */
     private $roles;
@@ -19,12 +24,15 @@ class Assignment
     /**
      * Assignment constructor.
      *
-     * @param string $subjectId
-     * @param array  $roles
+     * @param Subject $subject
+     * @param array $roles
+     *
+     * @throws InvalidArgument
      */
-    public function __construct($subjectId, array $roles = [])
+    public function __construct(Subject $subject, array $roles = [])
     {
-        $this->setSubjectId($subjectId);
+        $this->setSubjectId($subject->getSubjectId());
+        $this->setSubjectName($subject->getSubjectName());
         $this->setRoles($roles);
     }
 
@@ -65,6 +73,14 @@ class Assignment
         return $this->subjectId;
     }
 
+    /**
+     * @return string
+     */
+    public function getSubjectName()
+    {
+        return $this->subjectName;
+    }
+
 
     /**
      * @return array
@@ -98,6 +114,20 @@ class Assignment
         }
 
         $this->subjectId = (string) $subjectId;
+    }
+
+    /**
+     * @param string $subjectName
+     *
+     * @throws InvalidArgument
+     */
+    private function setSubjectName($subjectName)
+    {
+        if (empty($subjectName)) {
+            throw new InvalidArgument('Assignment subject name cannot be empty.');
+        }
+
+        $this->subjectName = (string) $subjectName;
     }
 
 

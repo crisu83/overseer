@@ -184,7 +184,7 @@ class Overseer
      */
     protected function getAssignmentsForSubject(Subject $subject)
     {
-        return $this->assignmentStorage->getAssignment($subject->getSubjectId());
+        return $this->assignmentStorage->getAssignment($subject);
     }
 
 
