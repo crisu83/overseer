@@ -94,6 +94,7 @@ class Builder
         foreach ($config as $subjectId => $assignmentConfig) {
             $this->overseer->saveAssignment(new Assignment(
                 $subjectId,
+                isset($assignmentConfig['subject_name']) ? $assignmentConfig['subject_name'] : null,
                 isset($assignmentConfig['roles']) ? $assignmentConfig['roles'] : []
             ));
         }

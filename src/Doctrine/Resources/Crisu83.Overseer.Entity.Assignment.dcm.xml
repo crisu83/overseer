@@ -7,6 +7,7 @@
     <entity name="Crisu83\Overseer\Entity\Assignment" table="rbac_assignments">
 
         <id name="subjectId" column="subject_id" type="string"/>
+        <field name="subjectName" column="subject_name" type="string" />
         <field name="roles" type="json_array" />
 
     </entity>
