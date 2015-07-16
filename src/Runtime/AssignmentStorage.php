@@ -56,8 +56,9 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
 
 
     /**
-     * @param $subjectId
-     * @param $subjectName
+     * @param string $subjectId
+     * @param string $subjectName
+     *
      * @return string
      */
     private function createKey($subjectId, $subjectName)
