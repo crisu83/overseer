@@ -1,6 +1,6 @@
 <?php namespace Crisu83\Overseer\Entity;
 
-use Crisu83\Overseer\Exception\InvalidArgument;
+use Crisu83\Overseer\Exception\PropertyNotValid;
 
 class Assignment
 {
@@ -24,15 +24,16 @@ class Assignment
     /**
      * Assignment constructor.
      *
-     * @param Subject $subject
-     * @param array $roles
+     * @param string $subjectId
+     * @param string $subjectName
+     * @param array  $roles
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
-    public function __construct(Subject $subject, array $roles = [])
+    public function __construct($subjectId, $subjectName, array $roles = [])
     {
-        $this->setSubjectId($subject->getSubjectId());
-        $this->setSubjectName($subject->getSubjectName());
+        $this->setSubjectId($subjectId);
+        $this->setSubjectName($subjectName);
         $this->setRoles($roles);
     }
 
@@ -40,12 +41,12 @@ class Assignment
     /**
      * @param string $roleName
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     public function addRole($roleName)
     {
         if (empty($permissionName)) {
-            throw new InvalidArgument('Role name cannot be empty.');
+            throw new PropertyNotValid('Role name cannot be empty.');
         }
 
         if ($this->hasRole($roleName)) {
@@ -72,6 +73,7 @@ class Assignment
     {
         return $this->subjectId;
     }
+
 
     /**
      * @return string
@@ -113,8 +115,9 @@ class Assignment
             throw new InvalidArgument('Assignment subject ID cannot be empty.');
         }
 
-        $this->subjectId = (string) $subjectId;
+        $this->subjectId = $subjectId;
     }
+
 
     /**
      * @param string $subjectName
@@ -127,7 +130,7 @@ class Assignment
             throw new InvalidArgument('Assignment subject name cannot be empty.');
         }
 
-        $this->subjectName = (string) $subjectName;
+        $this->subjectName = $subjectName;
     }
 
 
