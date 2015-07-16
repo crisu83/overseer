@@ -38,6 +38,7 @@ class RoleStorage implements \Crisu83\Overseer\Storage\RoleStorage
         return isset($this->roles[$name]) ? $this->roles[$name] : null;
     }
 
+
     /**
      * @inheritdoc
      */

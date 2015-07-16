@@ -18,6 +18,7 @@ interface RoleStorage
      */
     public function getRole($name);
 
+
     /**
      * Clear the roles.
      */

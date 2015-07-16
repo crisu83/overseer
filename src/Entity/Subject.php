@@ -8,6 +8,7 @@ interface Subject
      */
     public function getSubjectId();
 
+
     /**
      * @return string
      */

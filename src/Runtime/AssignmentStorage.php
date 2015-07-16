@@ -30,6 +30,7 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     public function saveAssignment(Assignment $assignment)
     {
         $key = $this->createKey($assignment->getSubjectId(), $assignment->getSubjectName());
+
         $this->assignments[$key] = $assignment;
     }
 
@@ -40,8 +41,10 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     public function getAssignment(Subject $subject)
     {
         $key = $this->createKey($subject->getSubjectId(), $subject->getSubjectName());
+
         return isset($this->assignments[$key]) ? $this->assignments[$key] : null;
     }
+
 
     /**
      * @inheritdoc
