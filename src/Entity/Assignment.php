@@ -107,12 +107,12 @@ class Assignment
     /**
      * @param mixed $subjectId
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     private function setSubjectId($subjectId)
     {
         if (empty($subjectId)) {
-            throw new InvalidArgument('Assignment subject ID cannot be empty.');
+            throw new PropertyNotValid('Assignment subject ID cannot be empty.');
         }
 
         $this->subjectId = $subjectId;
@@ -122,12 +122,12 @@ class Assignment
     /**
      * @param string $subjectName
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     private function setSubjectName($subjectName)
     {
         if (empty($subjectName)) {
-            throw new InvalidArgument('Assignment subject name cannot be empty.');
+            throw new PropertyNotValid('Assignment subject name cannot be empty.');
         }
 
         $this->subjectName = $subjectName;

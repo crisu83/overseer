@@ -1,6 +1,6 @@
 <?php namespace Crisu83\Overseer\Entity;
 
-use Crisu83\Overseer\Exception\InvalidArgument;
+use Crisu83\Overseer\Exception\PropertyNotValid;
 
 class Permission
 {
@@ -39,12 +39,12 @@ class Permission
     /**
      * @param string $ruleName
      *
-     * @throws \Crisu83\Overseer\Exception\InvalidArgument
+     * @throws \Crisu83\Overseer\Exception\PropertyNotValid
      */
     public function addRule($ruleName)
     {
         if ($this->hasRule($ruleName)) {
-            throw new InvalidArgument('Rule already exists.');
+            throw new PropertyNotValid('Rule already exists.');
         }
         $this->rules[] = $ruleName;
     }
@@ -57,6 +57,7 @@ class Permission
     {
         return !empty($this->rules);
     }
+
 
     /**
      * @param string $ruleName
@@ -120,7 +121,7 @@ class Permission
     private function setName($name)
     {
         if (empty($name)) {
-            throw new InvalidArgument('Permission name cannot be empty.');
+            throw new PropertyNotValid('Permission name cannot be empty.');
         }
 
         $this->name = $name;
