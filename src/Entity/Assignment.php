@@ -1,6 +1,6 @@
 <?php namespace Crisu83\Overseer\Entity;
 
-use Crisu83\Overseer\Exception\InvalidArgument;
+use Crisu83\Overseer\Exception\PropertyNotValid;
 
 class Assignment
 {
@@ -9,6 +9,11 @@ class Assignment
      * @var string
      */
     private $subjectId;
+
+    /**
+     * @var string
+     */
+    private $subjectName;
 
     /**
      * @var array
@@ -20,11 +25,15 @@ class Assignment
      * Assignment constructor.
      *
      * @param string $subjectId
+     * @param string $subjectName
      * @param array  $roles
+     *
+     * @throws PropertyNotValid
      */
-    public function __construct($subjectId, array $roles = [])
+    public function __construct($subjectId, $subjectName, array $roles = [])
     {
         $this->setSubjectId($subjectId);
+        $this->setSubjectName($subjectName);
         $this->setRoles($roles);
     }
 
@@ -32,12 +41,12 @@ class Assignment
     /**
      * @param string $roleName
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     public function addRole($roleName)
     {
         if (empty($permissionName)) {
-            throw new InvalidArgument('Role name cannot be empty.');
+            throw new PropertyNotValid('Role name cannot be empty.');
         }
 
         if ($this->hasRole($roleName)) {
@@ -67,6 +76,15 @@ class Assignment
 
 
     /**
+     * @return string
+     */
+    public function getSubjectName()
+    {
+        return $this->subjectName;
+    }
+
+
+    /**
      * @return array
      */
     public function getRoles()
@@ -89,15 +107,30 @@ class Assignment
     /**
      * @param mixed $subjectId
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     private function setSubjectId($subjectId)
     {
         if (empty($subjectId)) {
-            throw new InvalidArgument('Assignment subject ID cannot be empty.');
+            throw new PropertyNotValid('Assignment subject ID cannot be empty.');
         }
 
-        $this->subjectId = (string) $subjectId;
+        $this->subjectId = $subjectId;
+    }
+
+
+    /**
+     * @param string $subjectName
+     *
+     * @throws PropertyNotValid
+     */
+    private function setSubjectName($subjectName)
+    {
+        if (empty($subjectName)) {
+            throw new PropertyNotValid('Assignment subject name cannot be empty.');
+        }
+
+        $this->subjectName = $subjectName;
     }
 
 

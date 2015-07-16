@@ -29,17 +29,22 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
      */
     public function saveAssignment(Assignment $assignment)
     {
-        $this->assignments[$assignment->getSubjectId()] = $assignment;
+        $key = $this->createKey($assignment->getSubjectId(), $assignment->getSubjectName());
+
+        $this->assignments[$key] = $assignment;
     }
 
 
     /**
      * @inheritdoc
      */
-    public function getAssignment($subjectId)
+    public function getAssignment(Subject $subject)
     {
-        return isset($this->assignments[$subjectId]) ? $this->assignments[$subjectId] : null;
+        $key = $this->createKey($subject->getSubjectId(), $subject->getSubjectName());
+
+        return isset($this->assignments[$key]) ? $this->assignments[$key] : null;
     }
+
 
     /**
      * @inheritdoc
@@ -47,5 +52,17 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     public function clearAssignments()
     {
         $this->assignments = [];
+    }
+
+
+    /**
+     * @param string $subjectId
+     * @param string $subjectName
+     *
+     * @return string
+     */
+    private function createKey($subjectId, $subjectName)
+    {
+        return $subjectId . '|' . $subjectName;
     }
 }

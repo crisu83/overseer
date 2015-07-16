@@ -37,6 +37,7 @@ class PermissionStorage implements \Crisu83\Overseer\Storage\PermissionStorage
         return isset($this->permissions[$name]) ? $this->permissions[$name] : null;
     }
 
+
     /**
      * @inheritdoc
      */

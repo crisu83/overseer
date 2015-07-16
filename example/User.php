@@ -32,10 +32,19 @@ class User implements Subject
 
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getSubjectId()
     {
         return (string) $this->getId();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getSubjectName()
+    {
+        return 'user';
     }
 }

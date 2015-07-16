@@ -1,6 +1,6 @@
 <?php namespace Crisu83\Overseer\Entity;
 
-use Crisu83\Overseer\Exception\InvalidArgument;
+use Crisu83\Overseer\Exception\PropertyNotValid;
 
 class Role
 {
@@ -39,16 +39,16 @@ class Role
     /**
      * @param string $roleName
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     public function inheritRole($roleName)
     {
         if (empty($roleName)) {
-            throw new InvalidArgument('Role name cannot be empty.');
+            throw new PropertyNotValid('Role name cannot be empty.');
         }
 
         if ($roleName === $this->getName()) {
-            throw new InvalidArgument('Role cannot be added to itself.');
+            throw new PropertyNotValid('Role cannot be added to itself.');
         }
 
         if ($this->hasRole($roleName)) {
@@ -62,12 +62,12 @@ class Role
     /**
      * @param string $permissionName
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     public function addPermission($permissionName)
     {
         if (empty($permissionName)) {
-            throw new InvalidArgument('Permission name cannot be empty.');
+            throw new PropertyNotValid('Permission name cannot be empty.');
         }
 
         if ($this->hasPermission($permissionName)) {
@@ -148,12 +148,12 @@ class Role
     /**
      * @param string $name
      *
-     * @throws InvalidArgument
+     * @throws PropertyNotValid
      */
     private function setName($name)
     {
         if (empty($name)) {
-            throw new InvalidArgument('Role name cannot be empty.');
+            throw new PropertyNotValid('Role name cannot be empty.');
         }
 
         $this->name = $name;

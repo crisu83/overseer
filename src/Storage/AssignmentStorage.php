@@ -13,11 +13,12 @@ interface AssignmentStorage
 
 
     /**
-     * @param string $subjectId
+     * @param Subject $subject
      *
      * @return Assignment
      */
-    public function getAssignment($subjectId);
+    public function getAssignment(Subject $subject);
+
 
     /**
      * Clear the assignments.
