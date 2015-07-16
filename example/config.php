@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'roles' => [
-        'admin' => [
+    'roles'       => [
+        'admin'  => [
             'inherits' => ['writer', 'editor'],
         ],
         'writer' => [
@@ -13,17 +13,18 @@ return [
         ],
     ],
     'permissions' => [
-        'book.write' => ['resource' => 'book'],
-        'book.read' => ['resource' => 'book'],
-        'book.author' => [
+        'book.write'   => ['resource' => 'book'],
+        'book.read'    => ['resource' => 'book'],
+        'book.author'  => [
             'resource' => 'book',
-            'rules' => ['AuthorRule'],
+            'rules'    => ['AuthorRule'],
         ],
         'article.read' => ['resource' => 'article'],
     ],
     'assignments' => [
         '1' => [
-            'roles' => ['admin'],
+            'subject_name' => 'user',
+            'roles'        => ['admin'],
         ],
     ],
 ];
