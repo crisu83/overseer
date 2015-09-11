@@ -45,7 +45,7 @@ class Assignment
      */
     public function addRole($roleName)
     {
-        if (empty($permissionName)) {
+        if (empty($roleName)) {
             throw new PropertyNotValid('Role name cannot be empty.');
         }
 
@@ -94,6 +94,15 @@ class Assignment
 
 
     /**
+     * @param array $roles
+     */
+    public function changeRoles(array $roles)
+    {
+        $this->setRoles($roles);
+    }
+
+
+    /**
      * @param string $roleName
      *
      * @return bool
@@ -137,7 +146,7 @@ class Assignment
     /**
      * @param array $roles
      */
-    private function setRoles($roles)
+    private function setRoles(array $roles)
     {
         $this->roles = $roles;
     }
