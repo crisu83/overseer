@@ -105,6 +105,27 @@ class Overseer
 
 
     /**
+     * @param $subjectId
+     * @param $subjectName
+     *
+     * @return Assignment
+     */
+    public function getAssignment($subjectId, $subjectName)
+    {
+        return $this->assignmentStorage->getAssignment($subjectId, $subjectName);
+    }
+
+
+    /**
+     * @param Assignment $assignment
+     */
+    public function deleteAssignment(Assignment $assignment)
+    {
+        $this->assignmentStorage->deleteAssignment($assignment);
+    }
+
+
+    /**
      * Clear the assignments.
      */
     public function clearAssignments()
@@ -184,7 +205,7 @@ class Overseer
      */
     protected function getAssignmentsForSubject(Subject $subject)
     {
-        return $this->assignmentStorage->getAssignment($subject);
+        return $this->assignmentStorage->getAssignment($subject->getSubjectId(), $subject->getSubjectName());
     }
 
 

@@ -1,7 +1,6 @@
 <?php namespace Crisu83\Overseer\Doctrine\Storage;
 
 use Crisu83\Overseer\Entity\Assignment;
-use Crisu83\Overseer\Entity\Subject;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
@@ -42,9 +41,19 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     /**
      * @inheritdoc
      */
-    public function getAssignment(Subject $subject)
+    public function deleteAssignment(Assignment $assignment)
     {
-        return $this->repository->findOneBy(['subjectId' => $subject->getSubjectId(), 'subjectName' => $subject->getSubjectName()]);
+        $this->entityManager->remove($assignment);
+        $this->entityManager->flush($assignment);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getAssignment($subjectId, $subjectName)
+    {
+        return $this->repository->findOneBy(['subjectId' => $subjectId, 'subjectName' => $subjectName]);
     }
 
 

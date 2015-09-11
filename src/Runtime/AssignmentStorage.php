@@ -38,9 +38,20 @@ class AssignmentStorage implements \Crisu83\Overseer\Storage\AssignmentStorage
     /**
      * @inheritdoc
      */
-    public function getAssignment(Subject $subject)
+    public function deleteAssignment(Assignment $assignment)
     {
-        $key = $this->createKey($subject->getSubjectId(), $subject->getSubjectName());
+        $key = $this->createKey($assignment->getSubjectId(), $assignment->getSubjectName());
+
+        unset($this->assignments[$key]);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getAssignment($subjectId, $subjectName)
+    {
+        $key = $this->createKey($subjectId, $subjectName);
 
         return isset($this->assignments[$key]) ? $this->assignments[$key] : null;
     }
