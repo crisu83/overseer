@@ -244,11 +244,13 @@ class Overseer
                 throw new RoleNotFound($roleName);
             }
 
-            if ($role->hasRoles()) {
-                $roles = array_merge($this->getRolesByNames($role->getRoles()), $roles);
-            }
-
             $roles[$roleName] = $role;
+
+            if ($role->hasRoles()) {
+                foreach ($this->getRolesByNames($role->getRoles()) as $role) {
+                    $roles[$role->getName()] = $role;
+                }
+            }
         }
 
         return $roles;
