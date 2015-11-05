@@ -105,8 +105,8 @@ class Overseer
 
 
     /**
-     * @param $subjectId
-     * @param $subjectName
+     * @param string $subjectId
+     * @param string $subjectName
      *
      * @return Assignment
      */
@@ -163,28 +163,6 @@ class Overseer
 
 
     /**
-     * @param Permission $permission
-     * @param Subject    $subject
-     * @param Resource   $resource
-     * @param array      $params
-     *
-     * @return bool
-     */
-    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource, array $params)
-    {
-        if (!$permission->appliesToResource($resource)) {
-            return false;
-        }
-
-        if (!$permission->evaluate($subject, $resource, $params)) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    /**
      * @param string        $permissionName
      * @param Subject       $subject
      * @param Resource|null $resource
@@ -203,7 +181,7 @@ class Overseer
      *
      * @return Assignment|null
      */
-    protected function getAssignmentsForSubject(Subject $subject)
+    protected function getAssignmentForSubject(Subject $subject)
     {
         return $this->assignmentStorage->getAssignment($subject->getSubjectId(), $subject->getSubjectName());
     }
@@ -215,11 +193,11 @@ class Overseer
      * @return Role[]
      * @throws RoleNotFound
      */
-    protected function getRolesForSubject(Subject $subject)
+    public function getRolesForSubject(Subject $subject)
     {
         $roles = [];
 
-        $assignment = $this->getAssignmentsForSubject($subject);
+        $assignment = $this->getAssignmentForSubject($subject);
 
         if ($assignment !== null && $assignment->hasRoles()) {
             $roles = array_merge($this->getRolesByNames($assignment->getRoles()), $roles);
@@ -266,11 +244,13 @@ class Overseer
                 throw new RoleNotFound($roleName);
             }
 
-            if ($role->hasRoles()) {
-                $roles = array_merge($this->getRolesByNames($role->getRoles()), $roles);
-            }
-
             $roles[$roleName] = $role;
+
+            if ($role->hasRoles()) {
+                foreach ($this->getRolesByNames($role->getRoles()) as $role) {
+                    $roles[$role->getName()] = $role;
+                }
+            }
         }
 
         return $roles;
@@ -302,5 +282,27 @@ class Overseer
         }
 
         return $permissions;
+    }
+
+
+    /**
+     * @param Permission $permission
+     * @param Subject    $subject
+     * @param Resource   $resource
+     * @param array      $params
+     *
+     * @return bool
+     */
+    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource, array $params)
+    {
+        if (!$permission->appliesToResource($resource)) {
+            return false;
+        }
+
+        if (!$permission->evaluate($subject, $resource, $params)) {
+            return false;
+        }
+
+        return true;
     }
 }
