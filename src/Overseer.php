@@ -215,7 +215,7 @@ class Overseer
      * @return Role[]
      * @throws RoleNotFound
      */
-    protected function getRolesForSubject(Subject $subject)
+    public function getRolesForSubject(Subject $subject)
     {
         $roles = [];
 
