@@ -163,28 +163,6 @@ class Overseer
 
 
     /**
-     * @param Permission $permission
-     * @param Subject    $subject
-     * @param Resource   $resource
-     * @param array      $params
-     *
-     * @return bool
-     */
-    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource, array $params)
-    {
-        if (!$permission->appliesToResource($resource)) {
-            return false;
-        }
-
-        if (!$permission->evaluate($subject, $resource, $params)) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    /**
      * @param string        $permissionName
      * @param Subject       $subject
      * @param Resource|null $resource
@@ -302,5 +280,27 @@ class Overseer
         }
 
         return $permissions;
+    }
+
+
+    /**
+     * @param Permission $permission
+     * @param Subject    $subject
+     * @param Resource   $resource
+     * @param array      $params
+     *
+     * @return bool
+     */
+    protected function evaluatePermission(Permission $permission, Subject $subject, Resource $resource, array $params)
+    {
+        if (!$permission->appliesToResource($resource)) {
+            return false;
+        }
+
+        if (!$permission->evaluate($subject, $resource, $params)) {
+            return false;
+        }
+
+        return true;
     }
 }
