@@ -105,8 +105,8 @@ class Overseer
 
 
     /**
-     * @param $subjectId
-     * @param $subjectName
+     * @param string $subjectId
+     * @param string $subjectName
      *
      * @return Assignment
      */
