@@ -203,7 +203,7 @@ class Overseer
      *
      * @return Assignment|null
      */
-    protected function getAssignmentsForSubject(Subject $subject)
+    protected function getAssignmentForSubject(Subject $subject)
     {
         return $this->assignmentStorage->getAssignment($subject->getSubjectId(), $subject->getSubjectName());
     }
@@ -219,7 +219,7 @@ class Overseer
     {
         $roles = [];
 
-        $assignment = $this->getAssignmentsForSubject($subject);
+        $assignment = $this->getAssignmentForSubject($subject);
 
         if ($assignment !== null && $assignment->hasRoles()) {
             $roles = array_merge($this->getRolesByNames($assignment->getRoles()), $roles);
