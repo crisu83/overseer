@@ -1,0 +1,13 @@
+Crisu83\Overseer\Entity\Assignment:
+  type: entity
+  table: rbac_assignments
+  id:
+    subjectId:
+      column: subject_id
+      type: string
+  fields:
+    subjectName:
+      type: string
+      column: subject_name
+    roles:
+      type: json_array
