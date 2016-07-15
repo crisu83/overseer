@@ -1,0 +1,11 @@
+Crisu83\Overseer\Entity\Role:
+  type: entity
+  table: rbac_roles
+  id:
+    name:
+      type: string
+  fields:
+    roles:
+      type: json_array
+    permissions:
+      type: json_array
