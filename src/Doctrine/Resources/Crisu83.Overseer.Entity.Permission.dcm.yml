@@ -1,0 +1,12 @@
+Crisu83\Overseer\Entity\Permission:
+  type: entity
+  table: rbac_permissions
+  id:
+    name:
+      type: string
+  fields:
+    resourceName:
+      type: string
+      column: resource_name
+    rules:
+      type: json_array
