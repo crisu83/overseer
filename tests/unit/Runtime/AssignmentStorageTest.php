@@ -5,8 +5,8 @@ use Crisu83\Overseer\Runtime\AssignmentStorage;
 
 class AssignmentStorageTest extends \Codeception\TestCase\Test
 {
-    /** @var  $assigmentStorage AssignmentStorage */
-    protected $assigmentStorage;
+    /** @var  $assignmentStorage AssignmentStorage */
+    protected $assignmentStorage;
 
     /**
      * @inheritdoc
@@ -15,7 +15,7 @@ class AssignmentStorageTest extends \Codeception\TestCase\Test
     {
         parent::_before();
 
-        $this->assigmentStorage = new AssignmentStorage();
+        $this->assignmentStorage = new AssignmentStorage();
     }
 
     /**
@@ -25,9 +25,9 @@ class AssignmentStorageTest extends \Codeception\TestCase\Test
     {
         $sourceAssignment = new Assignment('1', 'user');
 
-        $this->assigmentStorage->saveAssignment($sourceAssignment);
+        $this->assignmentStorage->saveAssignment($sourceAssignment);
 
-        $assignment = $this->assigmentStorage->getAssignment('1', 'user');
+        $assignment = $this->assignmentStorage->getAssignment('1', 'user');
 
         $this->assertEquals($sourceAssignment, $assignment);
     }
