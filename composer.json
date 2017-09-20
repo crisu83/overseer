@@ -16,8 +16,9 @@
         }
     },
     "require-dev": {
-        "codeception/codeception": "^2.1@dev",
-        "codeception/verify": "dev-master",
-        "codeception/specify": "dev-master"
+      "codeception/codeception": "^2.1",
+      "codeception/specify": "^0.4",
+      "codeception/verify": "^0.3",
+      "satooshi/php-coveralls": "^1.0"
     }
 }
