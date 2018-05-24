@@ -108,7 +108,7 @@ class Overseer
      * @param string $subjectId
      * @param string $subjectName
      *
-     * @return Assignment
+     * @return Assignment|null
      */
     public function getAssignment($subjectId, $subjectName)
     {

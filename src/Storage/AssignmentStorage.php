@@ -22,7 +22,7 @@ interface AssignmentStorage
      * @param mixed  $subjectId
      * @param string $subjectName
      *
-     * @return Assignment
+     * @return Assignment|null
      */
     public function getAssignment($subjectId, $subjectName);
 
